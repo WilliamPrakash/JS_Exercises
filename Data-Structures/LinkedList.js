@@ -57,8 +57,54 @@ class LinkedList {
             // set the next
             current.next = node;
             node.next = following;
+            this.size++;
         }
     }
+
+    // Remove at specific index
+    removeAt(index) {
+        if (this.size <= 0 || index < 0 || index > this.size) {
+            console.log('Invalid parameters');
+            return;
+        } else {
+            var current = this.head;
+            var i = 1;
+            while (i + 1 < index) {
+                current = current.next;
+                i++;
+            }
+            // Set current = two nodes ahead, garbage collection will clear the node in the middle
+            current.next = current.next.next;
+            this.size--;
+            return;
+        }
+    }
+
+    // Remove first instance of specific val
+    removeVal(val) {
+        if(this.size <= 0) {
+            console.log('Linked list is empty');
+            return;
+        } else {
+            var current = this.head;
+            var prev;
+            while(current.data != val) {
+                prev = current;
+                current = current.next;
+            }
+
+            // If current.data does not equal the value, that means you reached the end of the list and should return
+            if(current.data != val) {
+                console.log('Specified data does not exist in the list');
+                return;
+            } else if (!current.next) {
+                current.next = null;
+            } else {
+                prev.next = prev.next.next;
+            }
+        }
+    }
+    
 
     print() {
         var current = this.head;
@@ -81,5 +127,7 @@ ll.add(61)
 ll.add(90)
 ll.add(12)
 ll.print()
-ll.insertAt(2, 100)
+//ll.insertAt(2, 100)
+//ll.removeAt(2);
+ll.removeVal(61)
 ll.print()
