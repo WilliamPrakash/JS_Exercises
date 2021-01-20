@@ -35,7 +35,8 @@ class LinkedList {
     }
 
     // Definitely needs work -- NOT correct
-    insertAt(data, index) {
+    insertAt(index, data) {
+        // Check for bad data
         if (index < 0 || index > this.size) {
             console.log('Invalid');
             return;
@@ -46,19 +47,12 @@ class LinkedList {
             current = this.head;
 
             // Iterate through till you get to the index
-            /*for (var i = 0; i++; i <= index) {
+            for (var i = 0; i++; i < index) {
                 current = current.next;
-            }*/
-
-            // or set current to head.node and just start at beginning
-
-            // this way does index - size
-            var remainderSpaces = size - index;
-            var i = 0;
-            while (i < remainderSpaces) {
-                current = current.next;
-                i++;
             }
+
+            // FOLLOWING IS UNDEFINED SET IT HERE
+            following = current.next;
 
             // set the next
             current.next = node;
@@ -68,9 +62,24 @@ class LinkedList {
 
     print() {
         var current = this.head;
+        var output = ""
+
+        while(current) {
+            output += " -> " + current.data;
+            //console.log('->' + current.data);
+            current = current.next;
+        }
+        console.log(output);
     }
 
 
 }
 
 const ll = new LinkedList();
+ll.add(45)
+ll.add(61)
+ll.add(90)
+ll.add(12)
+ll.print()
+ll.insertAt(2, 100)
+ll.print()
