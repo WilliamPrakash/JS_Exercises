@@ -1,19 +1,13 @@
 
-let obj = function() {
-    let i = 0;
-
-    return {
-        setI(k) {
-            i = k;
-        },
-        getI() {
-            return i;
-        }
-    }
+// JavaScript variables can be local or global
+// Global variables can be made local (private) with closures
+// Technically this is a closure
+var x = 3;
+function addTwo(num) {
+    num = num + 2;
+    return num;
 }
 
-let x = obj();
-
-x.setI(2);
-x.setI(4);
-console.log(x.getI());
+console.log(addTwo(x));
+x = 4;
+console.log(addTwo(x));
