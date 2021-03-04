@@ -18,26 +18,7 @@ var promise = new Promise(function(resolve, reject) {
     console.log(err); // Error: "It broke"
   });
 
-// Didn't work
-/*function prm(x) {
-  return new Promise(function(resolve, reject) {
-    if (x > 10){
-      resolve('Greater than 10');
-    } else {
-      reject(Error('Not greater than 10'));
-    }
-  })
-}
-
-console.log(prm(11));
-
-prm().then(function(result) {
-  console.log(result);
-  console.log('Testing');
-}, function(err) {
-  console.log(err); // Error: "It broke"
-})*/
-
+// Example from video; only uses resolve tho
 /*let cleanRoom = function() {
     return new Promise(function(resolve, reject) {
         resolve('Cleaned the room');
