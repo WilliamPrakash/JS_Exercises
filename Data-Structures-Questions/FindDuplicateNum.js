@@ -10,6 +10,6 @@ for(let i = 0; i < arr.length; i++) {
     } else {
         observed[i] = arr[i];
     }
-    console.log('No duplicates found');
+    //console.log('No duplicates found');
     return;
 }
