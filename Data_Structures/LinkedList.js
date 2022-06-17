@@ -26,6 +26,7 @@ class LinkedList {
             current.next = node;
         }
         this.size++;
+        return;
     }
 
     insertAt(index, data) {
@@ -42,20 +43,19 @@ class LinkedList {
             following = current.next;
             current.next = node;
             node.next = following;
+            return;
         }
     }
 
-    // Remove at specific index
     removeAt(index) {
-        if (this.size <= 0 || index < 0 || index > this.size) {
-            console.log('Invalid parameters');
-            return;
+        if (index < 0 || index > this.size) {
+            throw new Error('Invalid parameters');
+        } else if(this.size <= 0){
+            throw new Error('Linked list is empty');
         } else {
             var current = this.head;
-            var i = 1;
-            while (i + 1 < index) {
+            for (var i = 0; i < index-1; i++ ) {
                 current = current.next;
-                i++;
             }
             // Set current = two nodes ahead, garbage collection will clear the node in the middle
             current.next = current.next.next;
@@ -88,7 +88,6 @@ class LinkedList {
             }
         }
     }
-    
 
     print() {
         var current = this.head;
@@ -112,6 +111,7 @@ ll.add(3)
 ll.add(4)
 ll.print()
 ll.insertAt(3, 5)
-//ll.removeAt(2);
+ll.print()
+ll.removeAt(3)
 //ll.removeVal(61)
 ll.print()
