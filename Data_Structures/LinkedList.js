@@ -12,52 +12,36 @@ class LinkedList {
         this.size = 0;
     }
 
-    // Functions
     add(data) {
-        var node = new Node(data);  // creates a new node with data passed in
-        var current;    // store the current node
+        var node = new Node(data);
+        var current;
 
-        // If list is empty, add the element and make it head
         if(this.head == null){
             this.head = node;
         } else {
             current = this.head;
-
-            // Iterate to the end of the linked list
             while(current.next) {
                 current = current.next;
             }
-
-            // Add node
             current.next = node;
         }
         this.size++;
     }
 
-    // Definitely needs work -- NOT correct
     insertAt(index, data) {
-        // Check for bad data
-        if (index < 0 || index > this.size) {
-            console.log('Invalid');
-            return;
+        if (index-1 > this.size || index < 0) {
+            throw new Error('Error: incorrect index specified');
         } else {
-            // Create a node
             var node = new Node(data);
             var current, following;
             current = this.head;
 
-            // Iterate through till you get to the index
-            for (var i = 0; i++; i < index) {
+            for (var i = 0; i < index-1; i++ ) {
                 current = current.next;
             }
-
-            // FOLLOWING IS UNDEFINED SET IT HERE
             following = current.next;
-
-            // set the next
             current.next = node;
             node.next = following;
-            this.size++;
         }
     }
 
@@ -122,12 +106,12 @@ class LinkedList {
 }
 
 const ll = new LinkedList();
-ll.add(45)
-ll.add(61)
-ll.add(90)
-ll.add(12)
+ll.add(1)
+ll.add(2)
+ll.add(3)
+ll.add(4)
 ll.print()
-//ll.insertAt(2, 100)
+ll.insertAt(3, 5)
 //ll.removeAt(2);
-ll.removeVal(61)
+//ll.removeVal(61)
 ll.print()
