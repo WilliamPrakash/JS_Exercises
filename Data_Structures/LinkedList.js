@@ -67,8 +67,7 @@ class LinkedList {
     // Remove first instance of specific val
     removeVal(val) {
         if(this.size <= 0) {
-            console.log('Linked list is empty');
-            return;
+            throw new Error('Linked list is empty')
         } else {
             var current = this.head;
             var prev;
