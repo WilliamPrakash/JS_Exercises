@@ -14,15 +14,15 @@ function fibonacciRec(num) {
 // uh this doesn't work...
 function fibonacciIter(){
     let a = 1, b = 3, c;
-    console.log('long lookup[] = {' + a + 'L' + b + 'L');
+    //console.log('long lookup[] = {' + a + 'L' + b + 'L');
     c = 3 * (b - a);
     while ((c + a) / 3 == b) {
-        console.log(', ' + c + 'L')
+        //console.log(', ' + c + 'L')
         a = b;
         b = c;
         c = 3 * b - a;
     }
-    console.log(' };');
+    //console.log(' };');
 }
 
 fibonacciIter()
