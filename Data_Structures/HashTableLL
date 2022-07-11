@@ -1,10 +1,17 @@
 
+
 class LinkedList {
-  constructor() {
+  constructor(headData) {
     this.size = 0
-    this.head = null
+    this.head = headData
+  }
+
+  add(data) {
+    this.head = new Node(data)
+    this.size++
   }
 }
+
 
 class Node {
   constructor(data) {
@@ -12,6 +19,7 @@ class Node {
     this.next = null
   }
 }
+
 
 class HashTable {
     constructor() {
@@ -21,32 +29,42 @@ class HashTable {
 
     createHash(value) {
         let hash = 0
-        /*for (let c of value) {
-            hash += c.charCodeAt(0)
-        }*/
         value.split('').forEach(char => {
             hash += char.charCodeAt(0)
         })
-        console.log('-> ' + hash + ' ' + this.nodeContainer.length)
+        
         console.log('generated hash: ' + hash % this.nodeContainer.length)
-        return hash % this.nodeContainer.length
+        return (hash % this.nodeContainer.length)
     }
 
     set(value) {
         let index = this.createHash(value)
-        console.log('hash index: ' + index)
-        // make node here? or make 
+        console.log('index: ' + index)
+        // index is taken
+        if(this.nodeContainer[index] != null) {
+            while(this.nodeContainer[index].next) {
+                this.nodeContainer[index].next = this.nodeContainer[index].next.next
+            }
+            this.nodeContainer[index].next = new Node(value)
+        } 
+        // index isn't taken
+        else {
+            let ll = new LinkedList()
+            ll.add(value)
+            this.nodeContainer[index] = ll
+        }
     }
 
-    get() {
-
+    print() {
+        console.log(this.nodeContainer)
     }
 
 }
 
-
 let testHT = new HashTable()
 testHT.set('will')
-testHT.set('devon')
+testHT.set('Devon')
 testHT.set('will')
+testHT.print()
+
 
