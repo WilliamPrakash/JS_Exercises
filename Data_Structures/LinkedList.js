@@ -1,116 +1,93 @@
 
+
 class Node {
     constructor(data) {
-        this.data = data;
-        this.next = null;
+        this.data = data
+        this.next = null
     }
 }
 
 class LinkedList {
     constructor() {
-        this.head = null;
-        this.size = 0;
+        this.head = null
+        this.size = 0
+    }
+
+    isEmpty() {
+        if(this.head == null) return true
+        else return false
     }
 
     add(data) {
-        var node = new Node(data);
-        var current;
-
-        if(this.head == null){
-            this.head = node;
+        if(this.isEmpty()) {
+            this.head = new Node(data)
         } else {
-            current = this.head;
+            var current = this.head
             while(current.next) {
-                current = current.next;
+                current = current.next
             }
-            current.next = node;
+            let newNode = new Node(data)
+            current.next = newNode
         }
-        this.size++;
-        return;
+        this.size++
     }
 
+    // index specifies the position the new node will take
     insertAt(index, data) {
-        if (index-1 > this.size || index < 0) {
-            throw new Error('Error: incorrect index specified');
+        let newNode = new Node(data)
+        if(this.isEmpty()) {
+            console.log('linked list is empty, placing data at head')
+            this.add(newNode)
         } else {
-            var node = new Node(data);
-            var current, following;
-            current = this.head;
-
-            for (var i = 0; i < index-1; i++ ) {
-                current = current.next;
+            let prev = this.head
+            for(let i = 0; i < index-1; i++) {
+                prev = prev.next
             }
-            following = current.next;
-            current.next = node;
-            node.next = following;
-            return;
+            let post = prev.next
+            prev.next = newNode
+            newNode.next = post
         }
+        this.size++
     }
 
     removeAt(index) {
-        if (index < 0 || index > this.size) {
-            throw new Error('Invalid parameters');
-        } else if(this.size <= 0){
-            throw new Error('Linked list is empty');
+        if(this.isEmpty()) {
+            console.log('can\'t remove something from an empty list...')
         } else {
-            var current = this.head;
-            for (var i = 0; i < index-1; i++ ) {
-                current = current.next;
+            let prev = this.head
+            for(let i = 0; i < index-1; i++) {
+                prev = prev.next
             }
-            // Set current = two nodes ahead, garbage collection will clear the node in the middle
-            current.next = current.next.next;
-            this.size--;
-            return;
+            prev.next = prev.next.next
         }
-    }
 
-    // Remove first instance of specific val
-    removeVal(val) {
-        if(this.size <= 0) {
-            throw new Error('Linked list is empty')
-        } else {
-            var current = this.head;
-            var prev;
-            while(current.data != val) {
-                prev = current;
-                current = current.next;
-            }
-
-            // If current.data does not equal the value, that means you reached the end of the list and should return
-            if(current.data != val) {
-                console.log('Specified data does not exist in the list');
-                return;
-            } else if (!current.next) {
-                current.next = null;
-            } else {
-                prev.next = prev.next.next;
-            }
-        }
+        this.size--
     }
 
     print() {
-        var current = this.head;
-        var output = ""
-
-        while(current) {
-            output += " -> " + current.data;
-            //console.log('->' + current.data);
-            current = current.next;
+        if(this.isEmpty()) {
+            console.log('linked list is empty...')
+        } else {
+            let current = this.head
+            while(current) {
+                process.stdout.write(current.data + ' -> ')
+                current = current.next
+            }
         }
-        console.log(output);
+        console.log()
     }
-
-
 }
 
-const ll = new LinkedList();
-ll.add(1)
-ll.add(2)
-ll.add(3)
-ll.add(4)
+let ll = new LinkedList()
+ll.add('will')
+ll.add('grandpa')
+ll.add('noah')
 ll.print()
-ll.insertAt(3, 5)
+ll.insertAt(1,'TEST')
 ll.print()
-ll.removeAt(3)
-//ll.removeVal(61)
+ll.removeAt(1)
 ll.print()
+
+
+
+
