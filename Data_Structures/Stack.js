@@ -14,15 +14,20 @@ class Stack {
         this.pointer -= 1
     }
 
+    pop() {
+        // pointer will be pointing to the top of the stack, aka, the next empty element
+        console.log('popped value: ' + this.frame[this.pointer+1])
+        this.frame.splice(this.pointer+1, 1)
+        console.log(this.frame)
+        this.pointer -= 1
+    }
+
     print() {
         console.log('*** Stack Frame ***')
-        //for(let i = this.frame.length - 1; i > this.pointer; i--) {
-        for(let i = this.frame.length - 1; i < this.pointer; i--) {
+        for(let i = this.pointer; i < this.frame.length; i++) {
             console.log(this.frame[i])
         }
         console.log('*******************')
-        console.log()
-        console.log(this.frame)
     }
 }
 
@@ -31,72 +36,6 @@ let stack = new Stack()
 stack.push(10)
 stack.push(7)
 stack.push(24)
-stack.print()
+//stack.print()
+stack.pop()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*class Stack {
-    constructor() {
-        //this.size = 0
-        this.pointer = 10
-        this.stack = [10]
-    }
-
-    push(value) {
-        // this line also decrements this.pointer
-        this.stack[this.pointer--] = value
-    }
-    pop() {
-        // what's the function to pop something off of an array?
-        // I suppose I could use splice...
-        console.log('value to be popped: ' + this.stack[this.pointer])
-    }
-    print() {
-        console.log('*** Diagram of stack: ***\n')
-        // print from top to bottom
-        // start at pointer and work your way down (up index wise)
-        console.log('   Index   |   Value  ')
-        for(let i = this.pointer; i < this.stack.length; i++) {
-            console.log(i + '  |  ' + this.stack[i])
-        }
-        console.log('*** End of stack ***')
-    }
-
-}
-
-let stack1 = new Stack()
-stack1.push('Will')
-stack1.push('JP')
-stack1.push('Rob')
-stack1.print()
-stack1.pop()
-*/
