@@ -5,6 +5,67 @@
 
 class Stack {
     constructor() {
+        this.frame = new Array(10)
+        this.pointer = this.frame.length - 1    // modify this value
+    }
+
+    push(val) {
+        this.frame[this.pointer] = val
+        this.pointer -= 1
+    }
+
+    print() {
+        console.log('*** Stack Frame ***')
+        //for(let i = this.frame.length - 1; i > this.pointer; i--) {
+        for(let i = this.frame.length - 1; i < this.pointer; i--) {
+            console.log(this.frame[i])
+        }
+        console.log('*******************')
+        console.log()
+        console.log(this.frame)
+    }
+}
+
+
+let stack = new Stack()
+stack.push(10)
+stack.push(7)
+stack.push(24)
+stack.print()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*class Stack {
+    constructor() {
         //this.size = 0
         this.pointer = 10
         this.stack = [10]
@@ -38,4 +99,4 @@ stack1.push('JP')
 stack1.push('Rob')
 stack1.print()
 stack1.pop()
-
+*/
