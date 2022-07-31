@@ -1,7 +1,5 @@
+
 // LIFO
-
-
-
 
 class Stack {
     constructor() {
@@ -22,6 +20,20 @@ class Stack {
         this.pointer -= 1
     }
 
+    isEmpty() {
+        if(this.pointer == this.frame.length - 1) return true
+        else return false
+    }
+
+    isFull() {
+        if(this.pointer > 0) return true
+        else return false
+    }
+
+    peek() {
+        console.log('peek: ' + this.frame[this.pointer+1])
+    }
+
     print() {
         console.log('*** Stack Frame ***')
         for(let i = this.pointer; i < this.frame.length; i++) {
@@ -37,5 +49,6 @@ stack.push(10)
 stack.push(7)
 stack.push(24)
 //stack.print()
-stack.pop()
+//stack.pop()
+stack.peek()
 
