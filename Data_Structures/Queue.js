@@ -1,55 +1,45 @@
 
 class Queue {
     constructor() {
-        this.container = [];
+        this.container = new Array(10)
+        this.frontPointer = this.container.length - 1
+        this.backPointer = this.container.length - 1
     }
 
     enqueue(val) {
-        this.container.push(val);
+        this.container[this.backPointer] = val
+        if(this.backPointer == 0) this.backPointer = this.container.length
+        //else if (this.backPointer == this.frontPointer) console.log('queue full')
+        else this.backPointer -= 1
     }
 
     dequeue() {
-        if(this.container.length == 0) {
-            console.log('Queue is empty...');
-        }
-        console.log(this.container.shift());
-    }
-
-    front() {
-        if(this.container.length == 0) {
-            console.log('Queue is empty...');
-        }
-        console.log('front of queue: ' + this.container[0])
-    }
-    
-    isEmpty() {
-        return( this.container.length <= 0 ? true : false);
+        console.log('dequeued value: ' + this.container[this.frontPointer])
+        this.container.splice(this.frontPointer, 1)
+        this.frontPointer -= 1
     }
 
     printQueue() {
-        var i = 0;
-        var output = ''
-        // you gotta print it in reverse if you wanna
-        while(i < this.container.length) {
-            output += this.container[i] + "    ";
-            i++;
-        }
-        console.log(output);
+        console.log(this.container)
     }
 
 }
 
 // Initialize instance of Queue
 const queue = new Queue();
-queue.enqueue(18);
-queue.enqueue(7);
-queue.enqueue(62);
-queue.enqueue(32);
-queue.enqueue(75);
-queue.printQueue();
-queue.front();
-queue.dequeue();
-queue.printQueue();
+queue.enqueue(5)
+queue.enqueue(21)
+queue.enqueue(17)
+queue.enqueue(90)
+queue.enqueue(43)
+queue.enqueue(55)
+queue.enqueue(101)
+queue.enqueue(38)
+queue.enqueue(72)
+queue.enqueue(64)
+queue.printQueue()
+queue.dequeue()
+queue.printQueue()
 
 
 
