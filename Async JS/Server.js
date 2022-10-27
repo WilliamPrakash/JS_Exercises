@@ -1,9 +1,10 @@
 
 // http://localhost:8080
 // http://127.0.0.1:8080
-import grab from '../dataGrab.js'
+import grab from '../Async JS/dataGrab.js'
+import * as http from 'http'; //ES 6
 
-var http = require('http');
+
 let port = 8080
 
 http.createServer(function (req, res) {
