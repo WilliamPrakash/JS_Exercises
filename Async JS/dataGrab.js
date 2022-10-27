@@ -1,5 +1,7 @@
+import XMLHttpRequest from 'xhr2'
 
-export function grab() {
+export default function grab() {
+    // npm install xhr2
     const request = new XMLHttpRequest()
 
     // we can track the progress of a request using an event listener
