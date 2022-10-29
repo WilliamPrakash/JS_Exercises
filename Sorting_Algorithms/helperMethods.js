@@ -1,8 +1,8 @@
 
 
-export default function swap(arr, a, b) {
-    let temp = arr[a];
-    arr[a] = arr[b];
-    arr[b] = temp;
+export default function swap(arr, oldIndex, newIndex) {
+    let temp = arr[oldIndex];
+    arr[oldIndex] = arr[newIndex];
+    arr[newIndex] = temp;
     return arr
 }
