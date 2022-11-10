@@ -1,8 +1,8 @@
-import swap from '../Sorting_Algorithms/helperMethods.js'
+import swap from './helperMethods.js'
 
 // Best: O(N), Worst: O(N^2)
-// the bubble sort compares every two adjacent values
-// and swaps them if the first one is bigger than the second
+// compares every two adjacent values and swaps them
+// if the first one is bigger than the second
 
 function bubbleSort(arr) {
     for (let i = 0; i < arr.length; i++) {

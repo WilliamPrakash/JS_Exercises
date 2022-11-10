@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/WilliamPrakash/JavaScript_Exercises/issues"
   },
-  "homepage": "https://github.com/WilliamPrakash/JavaScript_Exercises#readme"
+  "homepage": "https://github.com/WilliamPrakash/JavaScript_Exercises#readme",
+  "dependencies": {
+    "xhr2": "^0.2.1"
+  }
 }

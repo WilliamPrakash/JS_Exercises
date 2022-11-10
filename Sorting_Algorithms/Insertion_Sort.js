@@ -1,8 +1,13 @@
-import swap from '../Sorting_Algorithms/helperMethods.js'
+import swap from './helperMethods.js'
 
-// Finds the minimum value in the array, puts it in the first position,
-// finds the second minimum value, places it in the second position, etc...
+// best: O(N), worst: O(N^2)
+// 1. assume the first element is already sorted
+// 2. compare the first and second elements - should the second value
+// stay in its place or be inserted before the value
+// 3. Next, you can do a similar comparison with the third value - 
+// should it be inserted in the first, second, or third position?
 
+/* is this right??? */
 
 function insertionSort(arr) {
     let minIndex
