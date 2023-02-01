@@ -1,9 +1,13 @@
 const http = require('http')
+const {getProducts} = require('./controllers/productController')
 
 const server = http.createServer((request,response) => {
-    if(request.url)
-    response.writeHead()
-    response.end(JSON.stringify(products))
+    if(request.url == '/api/products' && request.method === 'GET') {
+        getProducts(request, response)
+    } else {
+        response.writeHead(404, {'Content-Type': 'application/json'})
+        response.end(JSON.stringify({message: 'Route Not Found'}))
+    }
 })
 
 // In many environments you can set the environment variable PORT to tell your web server what port to listen to
