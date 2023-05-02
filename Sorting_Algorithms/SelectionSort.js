@@ -5,13 +5,7 @@ import swap from './helperMethods.js'
 // first position, finds the second min val, places it in the second position, etc...
 
 function selectionSort(arr) {
-    let newArrIndx = 0
-    let newArr = []
-    let min = arr[0]
-    // 
-    for (let i = 0; i < arr.length; i++) {
-
-    }
+    
 }
 
 let unsortedArray = [3,9,5,1,0]
