@@ -7,22 +7,21 @@ import swap from './helperMethods.js'
 */
 
 function selectionSort(arr) {
-    // find min in entire array
-    let min = arr[0]
-    let minIndex = 0
-
-    for(let j = 0; j < arr.length; j++){
-        if(min > arr[j]) {
-            min = arr[j]
-            minIndex = j
+    for(let i = 0; i < arr.length; i++) {
+        let min = arr[i]
+        let minIndex = i
+        // iterate through all elements after i
+        for(let j = i+1; j < arr.length; j++) {
+            if(min > arr[j]) {
+                min = arr[j]
+                minIndex = j
+            }
         }
+        // move min to original index (i)
+        let temp = arr[i]
+        arr[i] = min
+        arr[minIndex] = temp
     }
-
-    // put min at index i ??? instead of hardcoded 0
-    let temp = arr[0]
-    arr[0] = min
-    arr[minIndex] = temp
-
     return arr
 }
 
