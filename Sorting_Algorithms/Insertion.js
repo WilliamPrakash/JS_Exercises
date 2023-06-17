@@ -12,15 +12,18 @@ function insertionSort(arr) {
     // go through each element in the array, starting at
     // index 0 so we can compare to index 1
     for(let i = 1; i < arr.length; i++) {
-        // go backwards
-        // i is always one index ahead, j is one index behind
-        for(let j = i-1; j >= 0; j--) {
-            if(arr[i] < arr[i+1]) {
-                let temp = arr[i+1]
-                arr[i+1] = arr[i]
-                arr[i] = temp
-            }
+        // i -> current index
+        // j -> prev index (needs to iterate then reset)
+        let j = i
+        while(j > 0 && arr[j] < arr[j-1]) {
+            // swap elements
+            let temp = arr[j-1]
+            arr[j-1] = arr[j]
+            arr[j] = temp
+            // shift down one
+            j--
         }
+
     }
 
     return arr
