@@ -10,5 +10,9 @@ app.get('/', (req, res) => {
     //res.status(200).send('ok')
 })
 
+const userRouter = require('./routes/users')
+// links route to path
+app.use('/users', userRouter)
+
 app.listen(3000)
 
