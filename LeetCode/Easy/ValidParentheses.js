@@ -15,31 +15,65 @@ Output: false
 
 var isValid = function(s) {
     // let left, right, leftovers = [] // Does not work. left and right are considered to be undefined
-    let left = [], right = [], leftovers = []
+    let left = [], right = [], pairs = [], leftovers = []
 
-    // Sort right and left brackets into their respective lists
+    // Process 
     for (let i = 0; i < s.length; i++) {
-        if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
-            left.push(s[i])
+        switch(s[i]) {
+            // If there's an opening , check for a pair
+            // Should I be using a 2d list for pairs? Or did I do enough validating
+            // while filtering them into pairs[] ?
+            case '(':
+                if (s[i+1] == ']') {
+                    pairs.push(s[i], s[i + 1])
+                    i++
+                } else {
+                    left.push(s[i])
+                }
+                break
+            case '[':
+                if (s[i+1] == ']')  {
+                    pairs.push(s[i], s[i + 1])
+                    i++
+                } else {
+                    left.push(s[i])
+                }
+                break
+            case '{':
+                if (s[i+1] == '}')  {
+                    pairs.push(s[i], s[i + 1])
+                    i++
+                } else {
+                    left.push(s[i])
+                }
+                break
+            case ')':
+                right.push(s[i])
+                break
+            case ']':
+                right.push(s[i])
+                break
+            case '}':
+                right.push(s[i])
+               break
+            default: // ?
+                leftovers.push(s[i])
+                break
         }
-        else if (s[i] == ')' || s[i] == ']' || s[i] == '}') {
-            right.push(s[i])
-        }
-        else { // Catch-all for any other characters -> do we need to account for these?
-            leftovers.push(s[i])
-        }
+
     }
+
+    console.log(left)
+    console.log(right)
+    console.log(pairs)
 
     if (left.length != right.length) return false
     // "There is no way to stop or break a forEach() loop other than by throwing an exception."
     // https://stackoverflow.com/questions/34653612/what-does-return-keyword-mean-inside-foreach-function
 
-    // Can't assume parenthesis are in 
+    // Can't assume parenthesis are perfectly split ({})
+    // Might be pairs (){}
     for(let i = 0; i < left.length; i++) {
-        //console.log(right)
-        //console.log(left)
-        //console.log(left.pop())
-        //console.log(right.shift())
         if (left.pop() !== right.shift()) return false
     }
     
@@ -47,10 +81,13 @@ var isValid = function(s) {
 };
 
 let result1 = isValid("()")
-console.log(result1)
+let result2 = isValid("()[]{}")
+
+/*console.log(result1)
 
 let result2 = isValid("()[]{}")
 console.log(result2)
 
 let result3 = isValid("(]")
 console.log(result3)
+*/
