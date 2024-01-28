@@ -67,6 +67,11 @@ var isValid = function(s) {
     console.log(right)
     console.log(pairs)
 
+    // Check pairs if there's any
+    if(pairs.length > 0) {
+        // check to see if
+    }
+
     if (left.length != right.length) return false
     // "There is no way to stop or break a forEach() loop other than by throwing an exception."
     // https://stackoverflow.com/questions/34653612/what-does-return-keyword-mean-inside-foreach-function
@@ -81,13 +86,10 @@ var isValid = function(s) {
 };
 
 let result1 = isValid("()")
-let result2 = isValid("()[]{}")
-
-/*console.log(result1)
+console.log('Result 1: ' + result1)
 
 let result2 = isValid("()[]{}")
-console.log(result2)
+console.log('Result 2: ' + result2)
 
 let result3 = isValid("(]")
-console.log(result3)
-*/
+console.log('Result 3: ' + result3)
