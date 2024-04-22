@@ -8,7 +8,7 @@ const parenTable = {
 }
 
 var isValid = function(s) {
-    let left = [], right = []
+    let left = []
 
     // Can't have valid parentheses if there's an odd number of chars
     if (s.length % 2 != 0) { return false }
@@ -18,27 +18,24 @@ var isValid = function(s) {
 
         if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
             left.push(s[i])
-        }
+        } 
         else if (s[i] == ')' || s[i] == ']' || s[i] == '}') {
-            right.unshift(s[i])
+            // When you encounter a closing bracket, check if the top of the stack was the opening for it.
+            // If yes, pop it from the stack. Otherwise, return false.
+            //console.log(s[i])
+            if (left[0] == s[i]) {
+                //parenTable[left.pop()] !== right.shift()
+                left.pop()
+            } else { return false }
+            
         }
     }
-    console.log(left)
-    console.log(right)/*
-    console.log(parenTable[left.pop()])
-    console.log(parenTable[right.pop()])*/
-
-    // Compare parentheses
-    for (let i = 0; i < left.length; i++) {
-        if (parenTable[left.pop()] !== right.shift()) {
-            return false
-        }
-    }
+    
 return true
 }
 //[()} - fail
 //[]() - pass
 //()[]{} - pass
 //([)] - fail
-let result1 = isValid("([)]")
+let result1 = isValid("()")
 console.log('Result 1: ' + result1)
