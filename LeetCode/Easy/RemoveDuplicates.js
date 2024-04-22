@@ -1,4 +1,4 @@
-
+//26. Remove Duplicates from Sorted Array
 /*
 Given an integer array nums sorted in ascending order, remove the duplicates in-place 
 such that each unique element appears only once. The relative order of the elements should 
@@ -17,8 +17,29 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 */
 
 let removeDuplicates = function(nums) {
-
+    let prev = nums[0]-1
     //if it's like the same as the last number, remove it
-    
+    for (let i = 0; i < nums.length; i++) {
+        if (prev != nums[i]) {
+            prev = nums[i]
+        } else {
+            // Numbers equal each other, how many tho?
+            let originalIndex = i
+            let howMany = 1
+            while (nums[i] == prev) {
+                howMany++
+                i++
+            }
+            nums.splice(originalIndex ,howMany)
+            i = originalIndex
+            console.log(nums)
+        }
+    }
+    console.log(nums)
+
 }
+
+//[1,1,2]
+//[0,0,1,1,1,2,2,3,3,4] -> [0,1,2,3,4]
+console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4]))
 
