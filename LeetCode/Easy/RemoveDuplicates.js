@@ -17,23 +17,16 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 */
 
 let removeDuplicates = function(nums) {
-    let prev = nums[0]-1
-    //if it's like the same as the last number, remove it
+    
+
+    //
     for (let i = 0; i < nums.length; i++) {
-        if (prev != nums[i]) {
-            prev = nums[i]
-        } else {
-            // Numbers equal each other, how many tho?
-            let originalIndex = i
-            let howMany = 1
-            while (nums[i] == prev) {
-                howMany++
-                i++
-            }
-            nums.splice(originalIndex ,howMany)
-            i = originalIndex
-            console.log(nums)
+        //let next = nums[i+1]
+        if (nums[i] == nums[i+1]) {
+            
         }
+
+
     }
     console.log(nums)
 
