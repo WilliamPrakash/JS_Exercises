@@ -3,29 +3,34 @@
 substring without repeating characters.
 
 Example 1:
-
 Input: s = "abcabcbb"
 Output: 3
 Explanation: The answer is "abc", with the length of 3.
 */
 
-function lengthOfLongestSubstring(s) {
-    let i = 1
-    let temp = s[0]
-    let first = s[0]
+/* UNSOLVED, this is code from user Karina_Olenina */
+/* TODO: solve this my way */
 
-    /* DISCLAIMER: this logic currently relies on the 
-    beginning of a unique substring being the first char*/
-    console.log(first)
-    let x = s[i]
-    console.log(x)
-    while(s[i] !== first) {
-        console.log("s[i]: " + s[i])
-        temp += s[i]
-        i++
+function lengthOfLongestSubstring(s) {
+    let set = new Set()
+    let left = 0;
+    let maxSize = 0;
+
+    if(s.length === 0) return 0
+    if(s.length === 1) return 1
+
+    // main loop iterates through all characters
+    for (let i = 0; i < s.length; i++) {
+        // .has() returns a boolean
+        // a b c a b c b b
+        while(set.has(s[i])) {
+            set.delete(s[left])
+            left++
+        }
+        set.add(s[i])
+        maxSize = Math.max(maxSize, i - left + 1)
     }
-    //console.log(temp.length)
-    return temp.length
+    return maxSize
 }
 
 lengthOfLongestSubstring("abcabcbb")
