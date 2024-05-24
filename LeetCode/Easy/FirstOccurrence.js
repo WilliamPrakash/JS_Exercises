@@ -13,21 +13,9 @@ The first occurrence is at index 0, so we return 0.
 
 
 var strStr = function(haystack, needle) {
-    //iterate over all chars in 'haystack'
-    for(let i = 0; i < haystack.length; i++) {
-        //find first char in haystack that equals the
-        //first char of needle
-        console.log(haystack[i])
-        if (needle[0] == haystack[i]) {
-            let startIndex = i
-            //compare substrings
-            let x = haystack.substring(startIndex,i + needle.length)
-            if (needle === haystack.substring(startIndex,needle.length)) {
-                return startIndex
-            }
-        }
-    }
-    return -1
+    // wow, that was easy
+    let x = haystack.indexOf(needle)
+    return x
 }
 
 //strStr('sadbutsad','sad')
