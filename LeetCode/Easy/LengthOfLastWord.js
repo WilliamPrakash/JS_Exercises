@@ -16,11 +16,19 @@ Output: 6
 
 function lengthOfLastWord(s) {
     //start at the end
-    //remove any 
-    for(let i = 0; i < s.length; i++) {
-        
+    let total = 0
+    //remove any whitespace at the front+end
+    s = s.trim()
+
+    for(let i = s.length-1; i >= 0; i--) {
+        if (s[i] != ' ') {
+            total++
+        } else {
+            break
+        }
     }
+    return total
 }
 
 console.log(lengthOfLastWord('luffy is still joyboy'))
-
+console.log(lengthOfLastWord('  fly  me  to  the  moon  '))
