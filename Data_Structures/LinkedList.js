@@ -1,4 +1,4 @@
-
+/* Example */
 
 class Node {
     constructor(data) {
