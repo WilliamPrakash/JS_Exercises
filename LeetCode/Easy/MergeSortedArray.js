@@ -25,33 +25,39 @@ Output: [1]
 
 
 var merge = function(nums1, m, nums2, n) {
-    // Remove 0s
-    nums1 = nums1.filter(x => x !== 0)
-    nums2 = nums2.filter(x => x !== 0)
+    // Loop through the largest array going BACKWARDS
+    // Compare each number from the same index
+    
+    if (nums1.length > nums2.length) {
+        // If we do i < nums1.length, we'll run into an issue where the array element is empty
+        for (let i = nums1.length - 1; i >= 0; i--) {
+            // exit once nums2's index is -1
+            if(n == 0) {
+                return
+            }
 
-    // Iterate over each int in nums1
-    for (let i = 0; i < nums1.length; i++){
-        // Find all ints in num2 that are equal to or less than i+1 and splice it
-        let j = 0
-        while (nums2[j] <= nums1[i+1]){
-            nums1.splice(i+1, 0, nums2[j]) // index, how many elements to replace, value to insert/replace
-            nums2.shift() // https://stackoverflow.com/questions/29605929/remove-first-item-of-the-array-like-popping-from-stack
-            i++
-            console.log()
+            if (nums2[n - 1] > nums1[m - 1]) {
+                nums1[i] = nums2[n - 1]
+                n--
+            } else { // the value in nums2 is not greater than the last number in nums1
+                // remove the number at nums1[i]
+                nums1.splice(i,1)
+                // iterate through nums1 till we find a number <= the value in nums2
+                while (nums1[m - 1] > nums2[n - 1]) {
+                    m--
+                    i--
+                }
+                nums1.splice(i, 0, nums2[n - 1])
+                n--
+            }
         }
+    } else {
+        
+        for (let i = 0; i < nums2.length; i++) {
 
-        // If you've hit the end of nums1, and there's still numbers in nums2
-        // they need to be appended on the end of nums1
-        if (i == nums1.length - 1 && nums2.length !== 0) {
-            nums2.forEach(x => {
-                nums1.push(x)
-            })
-            // Force exit
-            break
         }
-        console.log(nums1)
     }
-    console.log(nums1)
+
 };
 
 merge([1,2,3,0,0,0], 3, [2,5,6], 3)
