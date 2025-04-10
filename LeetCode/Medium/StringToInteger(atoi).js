@@ -21,6 +21,7 @@ var myAtoi = function(s) {
 
     // 2. Signedness
     let sign = '+'
+    let signs = ''
     s = Array.from(s)
     let numString = ''
 
@@ -30,12 +31,16 @@ var myAtoi = function(s) {
             if (numString != '') {
                 i = s.length
             }
+            signs += '+'
         } else if (s[i] == '-') {
             sign = '-'
             // Sign is valid ONLY if we haven't parsed an int yet.
             if (numString != '') {
                 i = s.length
             }
+            signs += '-'
+        } else if (s[i] == ' ') {
+            i = s.length
         } else if ( !Number.isNaN(parseInt(s[i])) ) { // parseInt() will return NaN if not a number. Issue is, NaN is of type number.
             // Remove leading 0s
             while (parseInt(s[i]) == 0 && numString == '') {
@@ -58,7 +63,7 @@ var myAtoi = function(s) {
     }
 
     // 3. Conversion 
-    if (numString != '') {
+    if (numString != '' && signs.length <= 1) {
         if (sign == '-') {
             numString = sign + numString
         }
@@ -82,4 +87,5 @@ var myAtoi = function(s) {
 //myAtoi("0-1")
 //myAtoi("words and 987")
 //myAtoi("-91283472332") // expected: -2147483648
-myAtoi("+-12")
+//myAtoi("+-12")
+myAtoi("+  413")
