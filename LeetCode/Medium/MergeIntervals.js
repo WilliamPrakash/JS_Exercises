@@ -13,7 +13,7 @@ Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
 var merge = function(intervals) {
     let returnIntervals = [];
 
-    // Order intervals in ascending order (first num of interval)
+    // Order intervals in ascending order (by first num of interval)
     intervals.sort((a, b) => a[0] - b[0]);
     
     // Remove each interval for comparison
@@ -21,66 +21,42 @@ var merge = function(intervals) {
         let interval = intervals.shift();
         let first = interval[0];
         let last = interval[1];
-        let overlappingIntervals = [];
+        let overlappingInterval = [];
+        //let previouslyOverlappedInterval = [];
 
+        /* If we're looking at the last interval, ??? */
+        
         // Check for overlap with the rest of the intervals
         for (let i = 0; i < intervals.length; i++) {
-            /* MAKE SURE TO REMOVE ANY OVERLAPPING INTERVAL FROM "intervals" ARRAY */
+            // Overlap definitions:
             if (intervals[i][0] >= first && intervals[i][0] <= last || intervals[i][1] >= first && intervals[i][1] <= last) {
-                overlappingIntervals.push(intervals[i]);
-                intervals.splice(i,1);
+                overlappingInterval.push(intervals[i]);
+                // Remove overlapping interval from original array to avoid reprocessing it
+                intervals.splice(i, 1);
+            };
+
+            // If overlap, combine the comparing and overlapping intervals
+            if (overlappingInterval.length > 0) {
+                if (overlappingInterval[i][0] < first) {
+                    first = overlappingInterval[i][0];
+                }
+                if (overlappingInterval[i][1] > last) {
+                    last = overlappingInterval[i][1];
+                }
+                //returnIntervals.push([first, last]);
+                // Check to see if we need to remove the last interval
+                /*if (returnIntervals) {
+                    
+                };*/
+                
+                overlappingInterval = [];
+                i--; // If we added an interval to overlappingIntervals, we also removed one from intervals. Don't move forward an index
             };
         };
-        console.log(overlappingIntervals);
-
-        // Combine overlapping intervals
-        if (overlappingIntervals.length > 0) {
-            let least = interval[0];
-            let greatest = interval[1];
-            for (let i = 0; i < overlappingIntervals.length; i++) {
-                if (overlappingIntervals[i][0] < least) {
-                    least = overlappingIntervals[i][0];
-                }
-                else if (overlappingIntervals[i][1] > greatest) {
-                    greatest = overlappingIntervals[i][1];
-                }
-            };
-            returnIntervals.push([least, greatest]);
-        }
-        else {
-            returnIntervals.push(interval);
-        }
-    }
-
-    console.log(returnIntervals);
+        returnIntervals.push([first, last]);
+    };
     return returnIntervals;
 };
 
 //merge([[1,3],[2,6],[8,10],[15,18]]); // output: [[1,6],[8,10],[15,18]]
 merge([[1,4],[0,2],[3,5]]); // output: [[0,5]]
-//merge([[1,4],[4,5]]); // output: [[1,5]]
-//merge([[1,3],[2,6],[1,10]]) // output: [[1,10]]
-//merge([[1,4],[0,4]]) // output: [[0,4]]
-//merge([[1,4],[0,1]]) // output: [[0,4]]
-
-// Second version
-/*let returnIntervals = [];
-    // Compare each interval to all others
-    for (let i = 0; i < intervals.length; i++) {
-        // 
-        let front = intervals[i][0];
-        let back = intervals[i][1];
-        let overlappingIntervals = [ intervals[i] ]; // The interval we're comparing should be in here
-        for (let j = 0; j < intervals.length; j++) {
-            // Don't compare the same interval
-            i == j ? j++ : null;
-
-            // Check for overlap
-            if (intervals[j][0] >= front && intervals[j][1] <= back || intervals[j][1] >= front ) {
-                // Should I combine the intervals right here?
-                // Or should I put them into an interval array and then combine?
-                overlappingIntervals.push(intervals[j]);
-            }
-
-        };
-    };*/
