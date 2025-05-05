@@ -11,11 +11,16 @@ export default function GrabCredentials() {
 
     let creds = JSON.parse(fs.readFileSync(path, 'utf8'));
 
-    /* Add user to SQL connection string */
-    var sqlServerAuthenticationString = 'User Id=<user>;Password=<password>;';
-    sqlServerAuthenticationString = sqlServerAuthenticationString.replace('<user>', creds['SQLServer_User']);
-    sqlServerAuthenticationString = sqlServerAuthenticationString.replace('<password>', creds['SQLServer_Password']);
-    creds['SQLServer'] = sqlServerAuthenticationString + creds['SQLServer'];
+    // Set main SQL connection string
+    if (process.platform == 'darwin') { // Mac
+        creds['SQLServer'] = creds['SQLServer_Mac'];
+    } else if (process.platform == 'win32') { // Windows
+        // Add user to main SQL connection string
+        let sqlServerAuthenticationString = ';User Id=<user>;Password=<password>';
+        sqlServerAuthenticationString = sqlServerAuthenticationString.replace('<user>', creds['SQLServer_User']);
+        sqlServerAuthenticationString = sqlServerAuthenticationString.replace('<password>', creds['SQLServer_Password']);
+        creds['SQLServer'] =  creds['SQLServer_Win'] + sqlServerAuthenticationString;
+    }
+    
     return creds;
-
 };
