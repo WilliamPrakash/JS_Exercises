@@ -30,9 +30,8 @@ var swapPairs = function(head) {
     }
 
     /* Node swapping loop logic:
-    Check if there's a node before the pair ???
-    Check if there's a node after the pair
-    Currently on the first of the pair to be swapped
+    Preserve prior nodes
+    Preserve future nodes
 
     1 -> 2 -> 3 -> 4
     1 -> 3 -> 4 ; var temp = 2
@@ -44,16 +43,23 @@ var swapPairs = function(head) {
     4. assign temp.next to head.next.next.next? */
 
     // At this point, there's at least 3 nodes
-    let returnHead
+    let savedHead = head
+    head = head.next
     while (head.next.next != null) {
-        
+        let firstNode = head
+        let secondNode = head.next
+        // Check if secondNode.next != null ???
+        firstNode.next = secondNode.next
+        secondNode.next = firstNode
+        console.log(secondNode)
+
     }
     
     
 }
 
 //let nodes = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))))
-let nodes = new ListNode(1, new ListNode(2, new ListNode(3, null)))
+let nodes = new ListNode(0, new ListNode(1, new ListNode(2, new ListNode(3, null))))
 //let nodes = new ListNode(1, new ListNode(2, null))
 //let nodes = new ListNode(1, null)
 swapPairs(nodes)
