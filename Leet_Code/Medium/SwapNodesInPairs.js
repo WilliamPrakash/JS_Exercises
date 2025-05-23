@@ -4,10 +4,8 @@ modifying the values in the list's nodes (i.e., only nodes themselves may be cha
 
 Input: head = [1,2,3,4]
 Output: [2,1,4,3]
-
 Input: head = [1]
 Output: [1]
-
 Input: head = [1,2,3]
 Output: [2,1,3] */
 
@@ -19,12 +17,16 @@ function ListNode(val, next) {
 }
 
 var swapPairs = function(head) {
-    // Make sure there's a pair to swap
-    if (!head) {
-        return head // no nodes
+    if (!head) { // no nodes
+        return head
     }
-    else if (head && !head.next) {
-        return head // one node
+    else if (head && !head.next) { // one node
+        return head
+    }
+    else if (!head.next.next) { // two nodes
+        head.next.next = new ListNode(head.val, null)
+        head = head.next
+        return head
     }
 
     /* Node swapping loop logic:
@@ -41,17 +43,17 @@ var swapPairs = function(head) {
     3. assign head.next (1) to head.next. (3) (assuming there is one)
     4. assign temp.next to head.next.next.next? */
 
-    console.log(head)
-    let temp = head.next
-    if (head.next.next) {
-        head.next = head.next.next
+    // At this point, there's at least 3 nodes
+    let returnHead
+    while (head.next.next != null) {
+        
     }
-    temp.next = head;
-    console.log(temp)
+    
     
 }
 
-let nodes = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))))
-//let nodes = new ListNode(1, new ListNode(2, new ListNode(3, null)))
-//let nodes
+//let nodes = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))))
+let nodes = new ListNode(1, new ListNode(2, new ListNode(3, null)))
+//let nodes = new ListNode(1, new ListNode(2, null))
+//let nodes = new ListNode(1, null)
 swapPairs(nodes)
