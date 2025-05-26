@@ -23,43 +23,54 @@ var swapPairs = function(head) {
     else if (head && !head.next) { // one node
         return head
     }
-    else if (!head.next.next) { // two nodes
+    /*else if (!head.next.next) { // two nodes
         head.next.next = new ListNode(head.val, null)
         head = head.next
         return head
-    }
-
-    /* Node swapping loop logic:
-    Preserve prior nodes
-    Preserve future nodes
-
-    1 -> 2 -> 3 -> 4
-    1 -> 3 -> 4 ; var temp = 2
-    temp.next = 1
-
-    1. head.val (1)
-    2. save head.next (2) to a temp var
-    3. assign head.next (1) to head.next. (3) (assuming there is one)
-    4. assign temp.next to head.next.next.next? */
+    }*/
 
     // At this point, there's at least 3 nodes
-    let savedHead = head
+    // You'll need the prev node
+    let savedHeadRef = head.next // save ref to head.next cause it'll get swapped to the front
+    let temp
+    // Swap the first 2 nodes
+    temp = head.next
+    head.next = head.next.next
+    temp.next = head
+    head = temp
     head = head.next
-    while (head.next.next != null) {
-        let firstNode = head
-        let secondNode = head.next
-        // Check if secondNode.next != null ???
-        firstNode.next = secondNode.next
-        secondNode.next = firstNode
-        console.log(secondNode)
-
+    // Different swapping methodology here:
+    while (head != null && head.next != null && head.next.next != null) {
+        temp = head.next
+        head.next = head.next.next
+        temp.next = null
+        head.next.next = temp
+        console.log(head)
+        head = head.next
     }
-    
+    // case for odd values
+    // 1,2,3,4,5 test case is missing 5 on the end of the return
+    //if (head.next != null)
+
+    return savedHeadRef
     
 }
 
+let nodes = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))))
 //let nodes = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))))
-let nodes = new ListNode(0, new ListNode(1, new ListNode(2, new ListNode(3, null))))
 //let nodes = new ListNode(1, new ListNode(2, null))
 //let nodes = new ListNode(1, null)
 swapPairs(nodes)
+
+/* Partially working inner while loop logic
+        tempNode = head.next
+        if (head.next.next != null) { // There's at least another pair
+            head.next = head.next.next
+            tempNode.next = head
+            head = tempNode
+            head = head.next.next // move up 2 nodes
+        } else { // Last pair
+            //head.val = 80 // this updates savedHeadRef
+            head = head.next
+            break
+        }*/
