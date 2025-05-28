@@ -23,36 +23,24 @@ var swapPairs = function(head) {
     else if (head && !head.next) { // one node
         return head
     }
-    /*else if (!head.next.next) { // two nodes
-        head.next.next = new ListNode(head.val, null)
-        head = head.next
-        return head
-    }*/
+    
+    // source: https://www.youtube.com/watch?v=uvYp4vyOfhA&list=WL&index=26&t=2s
+    let dummy = new ListNode(0, head)
+    let prev = dummy, curr = head
 
-    // At this point, there's at least 3 nodes
-    // You'll need the prev node
-    let savedHeadRef = head.next // save ref to head.next cause it'll get swapped to the front
-    let temp
-    // Swap the first 2 nodes
-    temp = head.next
-    head.next = head.next.next
-    temp.next = head
-    head = temp
-    head = head.next
-    // Different swapping methodology here:
-    while (head != null && head.next != null && head.next.next != null) {
-        temp = head.next
-        head.next = head.next.next
-        temp.next = null
-        head.next.next = temp
-        console.log(head)
-        head = head.next
+    while (curr != null && curr.next != null) {
+        let nextPairNode = curr.next.next
+        let second = curr.next
+
+        second.next = curr
+        curr.next = nextPairNode
+        prev.next = second
+
+        prev = curr
+        curr = nextPairNode
     }
-    // case for odd values
-    // 1,2,3,4,5 test case is missing 5 on the end of the return
-    //if (head.next != null)
 
-    return savedHeadRef
+    return dummy.next
     
 }
 
