@@ -12,8 +12,7 @@ that property. If not found, undefined is returned
 -Shadowing: When a property lower in the prototype chain has the same
 name as a property further up the prototype chain, the property lowest
 down the chain gets accessed, "shadowing" the other property.
--All objects inherit from Object, whose ___proto___ === null.
-*/
+-All objects inherit from Object, whose ___proto___ === null. */
 
 "use strict"
 
